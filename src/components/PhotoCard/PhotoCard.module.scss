@@ -10,6 +10,7 @@
   grid-template-rows: 1fr;
 
   .card_front {
+    width: 300px;
     grid-area: 1 / 1;
     min-height: 300px;
     z-index: 2;
@@ -64,6 +65,8 @@
   }
 
   .card_info_box {
+    box-sizing: border-box;
+    width: 300px;
     background: rgba( 255, 255, 255, 0.15 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 4px );
@@ -124,6 +127,7 @@
       display: -webkit-box;
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
+      height: 56px;
     }
 
     .details {

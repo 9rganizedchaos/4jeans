@@ -1,0 +1,13 @@
+@use '../../styles/styles';
+
+.list_wrapper {
+  width: 300px;
+
+  @include styles.tablet {
+    width: 616px;
+  }
+
+  @include styles.desktop {
+    width: 932px;
+  }
+}
