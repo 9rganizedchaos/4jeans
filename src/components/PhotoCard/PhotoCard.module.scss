@@ -25,7 +25,6 @@
       svg {
         transition: transform 0.5s;
       }
-
       &.off {
         svg {
           transform: rotate(180deg);
@@ -38,10 +37,7 @@
     grid-area: 1 / 1;
     min-height: 300px;
     z-index: 1;
-    background-color: red;
     display: flex;
-
-
     img {
       width: 100%;
       object-fit: contain;
@@ -52,13 +48,12 @@
     padding: 12px;
     display: flex;
     justify-content: flex-end;
-
     button {
       svg {
         transition: stroke 0.3s ease, fill 0.3s ease;
         &.on {
-          stroke: red;
-          fill: red;
+          stroke: styles.$peach-500;
+          fill: styles.$peach-500;
         }
         &.off {
           stroke: styles.$gray-100;
@@ -78,7 +73,6 @@
     padding: 12px;
     position: absolute;
     transition: 0.5s;
-
     &.on {
       bottom: -112px;
     }
@@ -96,14 +90,12 @@
       .profile {
         display: flex;
         align-items: center;
-
         img {
           width: 36px;
           height: 36px;
           border-radius: 50%;
           margin-right: 8px;
         }
-
         p {
           color: styles.$gray-900;
           @include styles.font(text, md, 700);
@@ -148,7 +140,6 @@
         display: flex;
         align-items: center;
         color: styles.$gray-100;
-
         svg {
           stroke: styles.$gray-100;
           margin-right: 4px;

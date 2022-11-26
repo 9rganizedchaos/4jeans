@@ -3,7 +3,7 @@ import './App.scss';
 
 function App() {
   return (
-    <div className="App text-5xl-400">
+    <div className="App">
       4jeans
     </div>
   );
