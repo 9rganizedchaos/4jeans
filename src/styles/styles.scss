@@ -1,4 +1,4 @@
-@use 'reset';
-@use 'textStyles';
-@use 'colors';
-@use 'mediaQueries';
+@forward './reset';
+@forward './textStyles';
+@forward './colors';
+@forward './mediaQueries';

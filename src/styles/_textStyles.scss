@@ -1,9 +1,6 @@
-$types: (title, text);
-$sizes: (5xl, 4xl, 3xl, 2xl, xl, lg, md, sm, xs, 2xs);
-$weights: (900, 700, 500, 400, 300);
-
 @mixin font($type: text, $size, $weight: 500) {
   font: {
+    family: 'Noto Sans', sans-serif;
     @if $size == 5xl {
       @if $type == title {
         size: 72px;
@@ -68,22 +65,5 @@ $weights: (900, 700, 500, 400, 300);
       size: 16px;
     }
     weight: $weight;
-  }
-}
-
-@each $type in $types {
-  .#{$type} {
-    letter-spacing: -0.025em;
-    line-height: 1.5;
-
-    @each $size in $sizes {
-      &-#{$size} {
-        @each $weight in $weights {
-          &-#{$weight} {
-            @include font($type, $size, $weight);
-          }
-        }
-      }
-    }
   }
 }
