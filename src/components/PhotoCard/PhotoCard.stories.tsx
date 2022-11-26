@@ -25,5 +25,5 @@ const horizontalPhotoProps = {
   color: "#d95926"
 }
 
-export const VerticalPhoto = () => <PhotoCard {...verticalPhotoProps} />;
-export const HorizontalPhoto = () => <PhotoCard {...horizontalPhotoProps} />;
+export const Vertical = () => <PhotoCard {...verticalPhotoProps} />;
+export const Horizontal = () => <PhotoCard {...horizontalPhotoProps} />;

@@ -5,14 +5,14 @@ import { MapPin, Heart, ArrowUpCircle } from "react-feather";
 interface PhotoCardProps {
   imgUrl: string;
   altText?: string;
-  profileUrl: string;
-  username: string;
-  bio: string;
-  location: string;
+  profileUrl?: string;
+  username?: string | null;
+  bio?: string | null;
+  location?: string | null;
   color: string;
 }
 
-const PhotoCard = ({imgUrl, altText, profileUrl, username, bio, location, color }: PhotoCardProps) => {
+const PhotoCard = ({imgUrl, altText, profileUrl = "https://images.unsplash.com/profile-1609483876126-c002704cc7bdimage?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128", username = "unknown", bio = "This user did not leave a comment.", location = "unknown", color }: PhotoCardProps) => {
   const [isInfoBoxOn, setIsInfoBoxOn] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -48,7 +48,7 @@ const PhotoCard = ({imgUrl, altText, profileUrl, username, bio, location, color 
           <div className={styles.details}>
             <div className={styles.location}>
               <MapPin width={16} height={16} />
-              <p>{location}</p>
+              <p>{location || "unknown"}</p>
             </div>
             <button>
               <em>more</em>
