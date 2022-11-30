@@ -1,17 +1,17 @@
-.masonry_wrapper {
+.masonry-wrapper {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: stretch;
-  box-sizing: border-box;
   width: 100%;
+  box-sizing: border-box;
+  flex-direction: row;
+  align-content: stretch;
+  justify-content: center;
 
-  .masonry_column {
+  .masonry-column {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-content: stretch;
-    flex: 1;
     width: 0;
+    flex: 1;
+    flex-direction: column;
+    align-content: stretch;
+    justify-content: flex-start;
   }
 }

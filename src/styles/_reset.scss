@@ -7,6 +7,7 @@
 *::after {
   box-sizing: border-box;
 }
+
 html,
 body,
 div,
@@ -50,13 +51,12 @@ footer,
 header,
 menu,
 nav,
-section
-{
+section {
+  padding: 0;
   border: 0;
+  margin: 0;
   font: inherit;
   font-size: 100%;
-  margin: 0;
-  padding: 0;
   vertical-align: baseline;
 }
 
@@ -74,17 +74,21 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote::before,
 blockquote::after,
 q::before,
@@ -92,20 +96,22 @@ q::after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 button {
-  background: inherit;
-  border: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
   overflow: visible;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: inherit;
+  box-shadow: none;
   cursor: pointer;
 }
+
 i, em {
   font-style: italic;
 }

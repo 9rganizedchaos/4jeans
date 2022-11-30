@@ -1,6 +1,7 @@
 @mixin font($type: text, $size, $weight: 500) {
   font: {
     family: 'Noto Sans', sans-serif;
+    weight: $weight;
     @if $size == 5xl {
       @if $type == title {
         size: 72px;
@@ -64,6 +65,5 @@
     } @else {
       size: 16px;
     }
-    weight: $weight;
   }
 }
