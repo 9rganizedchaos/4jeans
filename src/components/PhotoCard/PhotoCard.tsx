@@ -10,6 +10,7 @@ export interface PhotoCardProps {
   bio?: string | null;
   location?: string | null;
   color: string;
+  handleMoreBtnClick: () => void;
 }
 
 function PhotoCard({
@@ -20,6 +21,7 @@ function PhotoCard({
   bio = 'This user did not leave a comment.',
   location = 'unknown',
   color,
+  handleMoreBtnClick,
 }: PhotoCardProps) {
   const [isInfoBoxOn, setIsInfoBoxOn] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -62,7 +64,7 @@ function PhotoCard({
               <MapPin width={16} height={16} />
               <p>{location || 'unknown'}</p>
             </div>
-            <button type="button">
+            <button type="button" onClick={handleMoreBtnClick}>
               <em>more</em>
             </button>
           </div>

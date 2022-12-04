@@ -4,7 +4,7 @@ import Masonry from '../Masonry/Masonry';
 
 interface PhotoCardListProps {
   children: React.ReactElement[];
-  className: string;
+  className?: string;
 }
 
 function PhotoCardList({ children, className }: PhotoCardListProps) {
@@ -16,3 +16,7 @@ function PhotoCardList({ children, className }: PhotoCardListProps) {
 }
 
 export default PhotoCardList;
+
+PhotoCardList.defaultProps = {
+  className: '',
+};

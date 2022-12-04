@@ -32,17 +32,25 @@ const horizontalPhotoProps = {
 };
 
 export function Vertical() {
+  const handleMoreBtnClick = () => {
+    console.log('More button clicked');
+  };
+
   return (
     <div className={styles['sb-card-container']}>
-      <PhotoCard {...verticalPhotoProps} />
+      <PhotoCard {...verticalPhotoProps} handleMoreBtnClick={handleMoreBtnClick} />
     </div>
   );
 }
 
 export function Horizontal() {
+  const handleMoreBtnClick = () => {
+    console.log('More button clicked');
+  };
+
   return (
     <div className={styles['sb-card-container']}>
-      <PhotoCard {...horizontalPhotoProps} />
+      <PhotoCard {...horizontalPhotoProps} handleMoreBtnClick={handleMoreBtnClick} />
     </div>
   );
 }

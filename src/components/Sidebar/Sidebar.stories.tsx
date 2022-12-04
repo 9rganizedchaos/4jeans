@@ -9,5 +9,9 @@ export default {
 } as ComponentMeta<typeof Sidebar>;
 
 export function Default() {
-  return <Sidebar photos={MOCK_PHOTOS} />;
+  const handleMoreBtnClick = () => {
+    console.log('More button clicked');
+  };
+
+  return <Sidebar photos={MOCK_PHOTOS} handleMoreBtnClick={handleMoreBtnClick} />;
 }

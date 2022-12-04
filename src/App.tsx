@@ -1,8 +1,16 @@
 import React from 'react';
 import './App.scss';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainPage from './pages/MainPage/MainPage';
 
 function App() {
-  return <div className="app">4jeans</div>;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

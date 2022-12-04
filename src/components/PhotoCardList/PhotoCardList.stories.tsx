@@ -11,6 +11,10 @@ export default {
 } as ComponentMeta<typeof PhotoCardList>;
 
 export function Default() {
+  const handleMoreBtnClick = () => {
+    console.log('More button clicked');
+  };
+
   return (
     <PhotoCardList className={styles['sb-list-wrapper']}>
       {MOCK_PHOTOS.map((photo) => (
@@ -23,6 +27,7 @@ export function Default() {
           location={photo.user.location}
           profileUrl={photo.user.profile_image.large}
           color={photo.color}
+          handleMoreBtnClick={handleMoreBtnClick}
         />
       ))}
     </PhotoCardList>

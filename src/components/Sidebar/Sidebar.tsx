@@ -5,9 +5,10 @@ import useHorizontalScroll from '../../hooks/useHorizontalScroll';
 
 interface SidebarProps {
   photos: any[];
+  handleMoreBtnClick: () => void;
 }
 
-function Sidebar({ photos }: SidebarProps) {
+function Sidebar({ photos, handleMoreBtnClick }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const scrollAreaRef = useHorizontalScroll();
 
@@ -38,6 +39,7 @@ function Sidebar({ photos }: SidebarProps) {
               location={photo.user.location}
               profileUrl={photo.user.profile_image.large}
               color={photo.color}
+              handleMoreBtnClick={handleMoreBtnClick}
             />
           ))}
         </ul>
