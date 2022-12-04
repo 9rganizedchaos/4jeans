@@ -1,0 +1,55 @@
+@use '../../styles/styles';
+
+.search-box-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    stroke: styles.$gray-300;
+  }
+
+  > input {
+    width: 500px;
+    padding: 17px 48px 15px;
+    border: 1px solid styles.$gray-300;
+    background-color: styles.$gray-100;
+    color: styles.$gray-700;
+    @include styles.font(text, 'lg', 400);
+
+    &::placeholder {
+      color: styles.$gray-300;
+    }
+
+    &:focus {
+      background-color: styles.$white;
+      outline: none;
+    }
+  }
+
+  .cancel-btn {
+    position: absolute;
+    right: 16px;
+    display: flex;
+
+    > svg {
+      stroke: styles.$gray-300;
+    }
+
+    &:hover {
+      > svg {
+        stroke: styles.$gray-700;
+      }
+    }
+  }
+}
+
+.sb-search-box-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
