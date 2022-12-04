@@ -2,61 +2,61 @@
   font: {
     family: 'Noto Sans', sans-serif;
     weight: $weight;
-    @if $size == 5xl {
+    @if $size == '5xl' {
       @if $type == title {
         size: 72px;
       } @else {
         size: 28px;
       }
-    } @else if $size == 4xl {
+    } @else if $size == '4xl' {
       @if $type == title {
         size: 60px;
       } @else {
         size: 26px;
       }
-    } @else if $size == 3xl {
+    } @else if $size == '3xl' {
       @if $type == title {
         size: 48px;
       } @else {
         size: 24px;
       }
-    } @else if $size == 2xl {
+    } @else if $size == '2xl' {
       @if $type == title {
         size: 36px;
       } @else {
         size: 22px;
       }
-    } @else if $size == xl {
+    } @else if $size == 'xl' {
       @if $type == title {
         size: 24px;
       } @else {
         size: 20px;
       }
-    } @else if $size == lg {
+    } @else if $size == 'lg' {
       @if $type == title {
         size: 21px;
       } @else {
         size: 18px;
       }
-    } @else if $size == md {
+    } @else if $size == 'md' {
       @if $type == title {
         size: 18px;
       } @else {
         size: 16px;
       }
-    } @else if $size == sm {
+    } @else if $size == 'sm' {
       @if $type == title {
         size: 16px;
       } @else {
         size: 14px;
       }
-    } @else if $size == xs {
+    } @else if $size == 'xs' {
       @if $type == title {
         size: 14px;
       } @else {
         size: 12px;
       }
-    } @else if $size == 2xs {
+    } @else if $size == '2xs' {
       @if $type == title {
         size: 12px;
       } @else {

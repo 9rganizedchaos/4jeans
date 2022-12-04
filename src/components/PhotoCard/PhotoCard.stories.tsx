@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
 import PhotoCard from './PhotoCard';
+import styles from './PhotoCard.module.scss';
 
 export default {
   title: 'PhotoCard',
@@ -31,9 +32,17 @@ const horizontalPhotoProps = {
 };
 
 export function Vertical() {
-  return <PhotoCard {...verticalPhotoProps} />;
+  return (
+    <div className={styles['sb-card-container']}>
+      <PhotoCard {...verticalPhotoProps} />
+    </div>
+  );
 }
 
 export function Horizontal() {
-  return <PhotoCard {...horizontalPhotoProps} />;
+  return (
+    <div className={styles['sb-card-container']}>
+      <PhotoCard {...horizontalPhotoProps} />
+    </div>
+  );
 }

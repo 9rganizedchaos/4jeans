@@ -109,7 +109,7 @@
         border: 1px solid styles.$gray-100;
         border-radius: 16px;
         color: styles.$gray-100;
-        @include styles.font(text, xs, 400);
+        @include styles.font(text, 'xs', 400);
 
         svg {
           margin-right: 4px;
@@ -142,7 +142,7 @@
 
         p {
           color: styles.$gray-900;
-          @include styles.font(text, md, 700);
+          @include styles.font(text, 'md', 700);
         }
       }
 
@@ -169,7 +169,15 @@
       color: styles.$gray-900;
       -webkit-line-clamp: 4;
       text-overflow: ellipsis;
-      @include styles.font(text, sm, 400);
+      @include styles.font(text, 'sm', 400);
     }
   }
+}
+
+.sb-card-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
 }

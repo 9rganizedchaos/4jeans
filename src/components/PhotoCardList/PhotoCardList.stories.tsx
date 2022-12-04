@@ -3,6 +3,7 @@ import { ComponentMeta } from '@storybook/react';
 import PhotoCardList from './PhotoCardList';
 import MOCK_PHOTOS from '../../mocks/images';
 import PhotoCard from '../PhotoCard/PhotoCard';
+import styles from './PhotoCardList.module.scss';
 
 export default {
   title: 'PhotoCardList',
@@ -11,7 +12,7 @@ export default {
 
 export function Default() {
   return (
-    <PhotoCardList>
+    <PhotoCardList className={styles['sb-list-wrapper']}>
       {MOCK_PHOTOS.map((photo) => (
         <PhotoCard
           key={photo.urls.regular}

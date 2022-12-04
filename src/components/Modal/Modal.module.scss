@@ -49,11 +49,23 @@
 }
 
 .modal-container-open {
-  animation: show-modal 200ms forwards;
+  &-fast {
+    animation: show-modal 200ms forwards;
+  }
+
+  &-slow {
+    animation: show-modal 600ms forwards;
+  }
 }
 
 .modal-container-close {
-  animation: close-modal 200ms forwards;
+  &-fast {
+    animation: close-modal 200ms forwards;
+  }
+
+  &-slow {
+    animation: close-modal 600ms forwards;
+  }
 }
 
 .sb-modal-opener {
@@ -65,7 +77,7 @@
   background-color: styles.$gray-200;
   color: styles.$black-alpha-800;
   transform: translate(-50%, -50%);
-  @include styles.font(text, sm, 500);
+  @include styles.font(text, 'sm', 500);
 }
 
 .sb-modal-content {

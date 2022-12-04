@@ -11,3 +11,10 @@
     width: 932px;
   }
 }
+
+.sb-list-wrapper {
+  position: absolute;
+  left: 50%;
+  padding: 100px 0;
+  transform: translate(-50%)
+}
