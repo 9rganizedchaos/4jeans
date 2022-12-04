@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MapPin, Heart, ArrowUpCircle } from 'react-feather';
 import styles from './PhotoCard.module.scss';
 
-interface PhotoCardProps {
+export interface PhotoCardProps {
   imgUrl: string;
   altText?: string;
   profileUrl?: string;

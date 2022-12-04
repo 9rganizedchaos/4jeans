@@ -4,11 +4,12 @@ import Masonry from '../Masonry/Masonry';
 
 interface PhotoCardListProps {
   children: React.ReactElement[];
+  className: string;
 }
 
-function PhotoCardList({ children }: PhotoCardListProps) {
+function PhotoCardList({ children, className }: PhotoCardListProps) {
   return (
-    <div className={styles['list-wrapper']}>
+    <div className={`${styles['list-wrapper']} ${className}`}>
       <Masonry gutter="10px">{children}</Masonry>
     </div>
   );

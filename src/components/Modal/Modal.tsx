@@ -39,14 +39,22 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
     <ModalContext.Provider value={modalContextValue}>
       {transitionIsOpen && (
         <Portal>
-          <div
-            className={`${styles['modal-container']} ${
-              isOpen ? styles['modal-container-open'] : styles['modal-container-close']
-            }`}
-          >
+          <div className={`${styles['modal-container']}`}>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <button type="button" className={styles['modal-container-overlay']} onClick={onClose} />
-            <div className={styles['modal-container-innerContent']}>{children}</div>
+            <button
+              type="button"
+              className={`${styles['modal-container-overlay']} ${
+                isOpen ? styles['modal-container-open-slow'] : styles['modal-container-close-slow']
+              }`}
+              onClick={onClose}
+            />
+            <div
+              className={`${styles['modal-container-innerContent']} ${
+                isOpen ? styles['modal-container-open-fast'] : styles['modal-container-close-fast']
+              }`}
+            >
+              {children}
+            </div>
           </div>
         </Portal>
       )}
