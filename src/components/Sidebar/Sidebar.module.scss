@@ -2,6 +2,7 @@
 
 .sidebar-wrapper {
   position: absolute;
+  z-index: 5;
   bottom: -532px;
   display: flex;
   width: 100%;
@@ -12,7 +13,7 @@
     display: flex;
     overflow: hidden;
     justify-content: flex-end;
-    padding: 8px;
+    padding: 16px 32px;
   }
 
   .sidebar-content {

@@ -5,9 +5,10 @@ import styles from './SearchBox.module.scss';
 interface SearchBoxProps {
   placeholder: string;
   handleEnterPress: () => void;
+  className?: string;
 }
 
-function SearchBox({ placeholder, handleEnterPress }: SearchBoxProps) {
+function SearchBox({ placeholder, handleEnterPress, className }: SearchBoxProps) {
   const [input, setInput] = useState<string>('');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +26,7 @@ function SearchBox({ placeholder, handleEnterPress }: SearchBoxProps) {
   };
 
   return (
-    <div className={styles['search-box-wrapper']}>
+    <div className={`${styles['search-box-wrapper']} ${className}`}>
       <Search className={styles['search-icon']} />
       <input value={input} placeholder={placeholder} onChange={handleInputChange} onKeyDown={handleKeyPress} />
       <button type="button" className={styles['cancel-btn']} onClick={handleCancelBtnClick}>
@@ -36,3 +37,7 @@ function SearchBox({ placeholder, handleEnterPress }: SearchBoxProps) {
 }
 
 export default SearchBox;
+
+SearchBox.defaultProps = {
+  className: '',
+};

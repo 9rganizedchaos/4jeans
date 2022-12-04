@@ -167,9 +167,9 @@
       margin-bottom: 16px;
       -webkit-box-orient: vertical;
       color: styles.$gray-900;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 3;
       text-overflow: ellipsis;
-      @include styles.font(text, 'sm', 400);
+      @include styles.font(text, 'xs', 400);
     }
   }
 }
