@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import styles from './MainPage.module.scss';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import MOCK_PHOTOS from '../../mocks/images';
@@ -6,18 +7,28 @@ import SearchBox from '../../components/SearchBox/SearchBox';
 import PhotoCardList from '../../components/PhotoCardList/PhotoCardList';
 import PhotoCard from '../../components/PhotoCard/PhotoCard';
 import Modal from '../../components/Modal/Modal';
+import { getPhotoList } from './request';
+import { Photo } from '../../types/photo';
+import { simplifyData } from '../../utils/photo';
 
 function MainPage() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [photoRepo, setPhotoRepo] = useState<Photo[]>([]);
+  const [page, setPage] = useState<number>(1);
+
+  const { isLoading: isPhotoListLoading } = useQuery(['photo', 'list'], () => getPhotoList(page), {
+    onSuccess: (data) => {
+      setPhotoRepo([...photoRepo, ...simplifyData(data.data)]);
+      setPage(page + 1);
+    },
+  });
 
   const handleEnterPress = () => {
     console.log('Enter Pressed!');
   };
-
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
-
   const handleMoreBtnClick = () => {
     setIsModalOpen(true);
   };
@@ -44,21 +55,15 @@ function MainPage() {
             />
           </div>
           <div className={styles['card-list-wrapper']}>
-            <PhotoCardList>
-              {MOCK_PHOTOS.map((photo) => (
-                <PhotoCard
-                  key={photo.urls.regular}
-                  imgUrl={photo.urls.regular}
-                  altText={photo.alt_description || 'test image'}
-                  bio={photo.user.bio}
-                  username={photo.user.username}
-                  location={photo.user.location}
-                  profileUrl={photo.user.profile_image.large}
-                  color={photo.color}
-                  handleMoreBtnClick={handleMoreBtnClick}
-                />
-              ))}
-            </PhotoCardList>
+            {isPhotoListLoading ? (
+              'Loading...'
+            ) : (
+              <PhotoCardList>
+                {photoRepo.map((photo) => (
+                  <PhotoCard {...photo} key={photo.imgUrl} handleMoreBtnClick={handleMoreBtnClick} />
+                ))}
+              </PhotoCardList>
+            )}
           </div>
         </div>
       </div>
