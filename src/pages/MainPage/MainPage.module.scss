@@ -1,12 +1,5 @@
 @use '../../styles/styles';
 
-.sb-modal-content {
-  width: 900px;
-  height: 400px;
-  background-color: styles.$white;
-  box-shadow: 0 0 15px 7px rgb(0 0 0 / 25%);
-}
-
 .page-wrapper {
   position: relative;
   display: flex;
@@ -18,29 +11,14 @@
   .page-scroll-layer {
     display: flex;
     width: 100%;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     overflow-x: hidden;
     overflow-y: scroll;
 
     .page-content {
       width: 1150px;
-      padding: 80px;
-
-      .page-header {
-        > h1 {
-          @include styles.font(title, '4xl', 500);
-        }
-
-        > p {
-          margin-bottom: 16px;
-          font-style: italic;
-          @include styles.font(text, 'md', 400);
-        }
-
-        .main-page-search-box {
-          margin-bottom: 24px;
-        }
-      }
+      padding: 8px 80px 80px;
 
       .card-list-wrapper {
         display: flex;
@@ -50,4 +28,11 @@
       }
     }
   }
+}
+
+.sb-modal-content {
+  width: 900px;
+  height: 400px;
+  background-color: styles.$white;
+  box-shadow: 0 0 15px 7px rgb(0 0 0 / 25%);
 }

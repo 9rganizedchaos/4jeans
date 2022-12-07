@@ -82,11 +82,11 @@
     box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
     transition: 0.5s;
 
-    &.on {
-      bottom: -112px;
+    &.off {
+      bottom: -114px;
     }
 
-    &.off {
+    &.on {
       bottom: 0;
     }
 
@@ -152,7 +152,7 @@
           transition: transform 0.5s;
         }
 
-        &.off {
+        &.on {
           svg {
             transform: rotate(180deg);
           }

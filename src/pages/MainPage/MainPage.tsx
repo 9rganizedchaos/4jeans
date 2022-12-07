@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import styles from './MainPage.module.scss';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import MOCK_PHOTOS from '../../mocks/images';
-import SearchBox from '../../components/SearchBox/SearchBox';
 import PhotoCardList from '../../components/PhotoCardList/PhotoCardList';
 import PhotoCard from '../../components/PhotoCard/PhotoCard';
 import Modal from '../../components/Modal/Modal';
 import { getPhotoList } from './request';
 import { Photo } from '../../types/photo';
 import { simplifyData } from '../../utils/photo';
+import Header from '../../components/Header/Header';
 
 function MainPage() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [photoRepo, setPhotoRepo] = useState<Photo[]>([]);
   const [page, setPage] = useState<number>(1);
+
+  const scrollLayerRef = useRef<HTMLDivElement>(null);
 
   const { isLoading: isPhotoListLoading } = useQuery(['photo', 'list'], () => getPhotoList(page), {
     onSuccess: (data) => {
@@ -23,7 +25,7 @@ function MainPage() {
     },
   });
 
-  const handleEnterPress = () => {
+  const handleEnterPressSearch = () => {
     console.log('Enter Pressed!');
   };
   const handleModalClose = () => {
@@ -38,22 +40,9 @@ function MainPage() {
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <div className={styles['sb-modal-content']} />
       </Modal>
-      <div className={styles['page-scroll-layer']}>
+      <div className={styles['page-scroll-layer']} ref={scrollLayerRef}>
+        <Header handleEnterPressSearch={handleEnterPressSearch} scrollLayerRef={scrollLayerRef} />
         <div className={styles['page-content']}>
-          <div className={styles['page-header']}>
-            <h1>👖👖👖👖</h1>
-            <p>
-              Hello, welcome to 4Jeans. This is a photo finder app using Unsplash API. <br />
-              Search for some high-quality photos you like. You can apply filters to the photos, and you can also
-              download
-              <br /> them. If you like this page, please visit my GitHub and hit Star. Thank you! :)
-            </p>
-            <SearchBox
-              placeholder="search your photo!"
-              handleEnterPress={handleEnterPress}
-              className={styles['main-page-search-box']}
-            />
-          </div>
           <div className={styles['card-list-wrapper']}>
             {isPhotoListLoading ? (
               'Loading...'
