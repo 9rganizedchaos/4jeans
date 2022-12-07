@@ -1,0 +1,59 @@
+@use '../../styles/styles';
+
+.header-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-top: 80px;
+  background-color: styles.$gray-10;
+
+  .page-header {
+    width: 990px;
+
+    > h1 {
+      @include styles.font(title, '4xl', 500);
+    }
+
+    > p {
+      margin-bottom: 16px;
+      font-style: italic;
+      @include styles.font(text, 'md', 400);
+    }
+
+    .main-page-search-box {
+      margin-bottom: 24px;
+    }
+  }
+
+  &.folded {
+    position: fixed;
+    z-index: 10;
+    width: calc(100% + 8px);
+    padding: 16px 32px;
+    background-color: styles.$gray-200;
+    box-shadow: 0 0 22px 0 rgb(0 0 0 / 20%);
+
+
+    .page-header {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      > h1 {
+        font-size: 40px;
+      }
+
+      > p {
+        display: none;
+      }
+
+      .main-page-search-box {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.sb-header-bg {
+  height: 200vh;
+}
