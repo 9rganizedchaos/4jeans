@@ -35,7 +35,7 @@
     position: relative;
     z-index: 2;
     overflow: hidden;
-    width: 300px;
+    width: 100%;
     min-height: 300px;
     grid-area: 1 / 1;
 
@@ -67,6 +67,10 @@
     img {
       width: 100%;
       object-fit: contain;
+    }
+
+    &.liked-list {
+      height: 450px;
     }
   }
 
@@ -141,7 +145,11 @@
         }
 
         p {
+          overflow: hidden;
+          width: 180px;
           color: styles.$gray-900;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           @include styles.font(text, 'md', 700);
         }
       }

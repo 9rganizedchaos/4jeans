@@ -18,6 +18,7 @@
 
   .sidebar-content {
     display: flex;
+    height: 532px;
     align-items: center;
     padding: 40px;
     background-color: styles.$gray-100;
@@ -32,6 +33,28 @@
     > ul {
       display: flex;
       gap: 16px;
+    }
+
+    .empty-content {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      svg {
+        width: 100px;
+        height: 100px;
+        stroke: styles.$gray-500;
+        stroke-width: 1px;
+      }
+
+      p {
+        color: styles.$gray-600;
+        font-style: italic;
+        @include styles.font(text, 'lg', 400);
+      }
     }
   }
 

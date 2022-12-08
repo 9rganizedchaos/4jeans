@@ -15,3 +15,11 @@ export function Default() {
 
   return <Sidebar photos={MOCK_PHOTOS} handleMoreBtnClick={handleMoreBtnClick} />;
 }
+
+export function NoCard() {
+  const handleMoreBtnClick = () => {
+    console.log('More button clicked');
+  };
+
+  return <Sidebar photos={[]} handleMoreBtnClick={handleMoreBtnClick} />;
+}

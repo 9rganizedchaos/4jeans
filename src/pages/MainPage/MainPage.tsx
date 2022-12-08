@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import styles from './MainPage.module.scss';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import MOCK_PHOTOS from '../../mocks/images';
 import PhotoCardList from '../../components/PhotoCardList/PhotoCardList';
 import Modal from '../../components/Modal/Modal';
 import { getPhotoList } from './request';
@@ -11,9 +10,15 @@ import { simplifyData } from '../../utils/photo';
 import Header from '../../components/Header/Header';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
+const LOCAL_STORAGE_KEY = '4jeans-liked-list';
+
 function MainPage() {
+  const likedListStore = localStorage.getItem(LOCAL_STORAGE_KEY);
+  const initialLikedList = JSON.parse(likedListStore || JSON.stringify([]));
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [photoRepo, setPhotoRepo] = useState<Photo[]>([]);
+  const [likedPhotoRepo, setLikedPhotoRepo] = useState<Photo[]>(initialLikedList);
   const [page, setPage] = useState<number>(1);
 
   const scrollLayerRef = useRef<HTMLDivElement>(null);
@@ -39,6 +44,19 @@ function MainPage() {
   const handleMoreBtnClick = () => {
     setIsModalOpen(true);
   };
+  const handleLikeBtnClick = (photo: Photo) => {
+    if (likedPhotoRepo.find((likedPhoto) => likedPhoto.imgUrl === photo.imgUrl)) {
+      const removedLikedPhotoRepo = likedPhotoRepo.filter((likedPhoto) => likedPhoto.imgUrl !== photo.imgUrl);
+
+      setLikedPhotoRepo(removedLikedPhotoRepo);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(removedLikedPhotoRepo));
+    } else {
+      const updatedLikedPhotoRepo = [...likedPhotoRepo, photo];
+
+      setLikedPhotoRepo(updatedLikedPhotoRepo);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedLikedPhotoRepo));
+    }
+  };
 
   useEffect(() => {
     if (entry) {
@@ -56,7 +74,12 @@ function MainPage() {
         <div className={styles['page-content']}>
           <div className={styles['card-list-wrapper']}>
             {photoRepo.length === 0 ? null : (
-              <PhotoCardList photoRepo={photoRepo} handleMoreBtnClick={handleMoreBtnClick} />
+              <PhotoCardList
+                photoRepo={photoRepo}
+                likedPhotoRepo={likedPhotoRepo}
+                handleMoreBtnClick={handleMoreBtnClick}
+                handleLikeBtnClick={handleLikeBtnClick}
+              />
             )}
           </div>
           <div className={styles['data-fetching-sensor']} ref={dataFetchingSensorRef}>
@@ -64,7 +87,11 @@ function MainPage() {
           </div>
         </div>
       </div>
-      <Sidebar photos={MOCK_PHOTOS} handleMoreBtnClick={handleMoreBtnClick} />
+      <Sidebar
+        photos={likedPhotoRepo}
+        handleMoreBtnClick={handleMoreBtnClick}
+        handleLikeBtnClick={handleLikeBtnClick}
+      />
     </div>
   );
 }
