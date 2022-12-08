@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { Inbox } from 'react-feather';
 import styles from './Sidebar.module.scss';
 import PhotoCard from '../PhotoCard/PhotoCard';
 import useHorizontalScroll from '../../hooks/useHorizontalScroll';
+import { Photo } from '../../types/photo';
 
 interface SidebarProps {
   photos: any[];
   handleMoreBtnClick: () => void;
+  handleLikeBtnClick: (photo: Photo) => void;
 }
 
-function Sidebar({ photos, handleMoreBtnClick }: SidebarProps) {
+function Sidebar({ photos, handleMoreBtnClick, handleLikeBtnClick }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const scrollAreaRef = useHorizontalScroll();
 
@@ -28,21 +31,29 @@ function Sidebar({ photos, handleMoreBtnClick }: SidebarProps) {
         </button>
       </div>
       <div className={styles['sidebar-content']} ref={scrollAreaRef}>
-        <ul>
-          {photos.map((photo) => (
-            <PhotoCard
-              key={photo.urls.regular}
-              imgUrl={photo.urls.regular}
-              altText={photo.alt_description || 'test image'}
-              bio={photo.user.bio}
-              username={photo.user.username}
-              location={photo.user.location}
-              profileUrl={photo.user.profile_image.large}
-              color={photo.color}
-              handleMoreBtnClick={handleMoreBtnClick}
-            />
-          ))}
-        </ul>
+        {photos.length > 0 ? (
+          <ul>
+            {photos.map((photo) => (
+              <PhotoCard
+                key={photo.imgUrl}
+                {...photo}
+                isOnLikedList
+                isLiked
+                handleMoreBtnClick={handleMoreBtnClick}
+                handleLikeBtnClick={handleLikeBtnClick}
+              />
+            ))}
+          </ul>
+        ) : (
+          <div className={styles['empty-content']}>
+            <Inbox />
+            <p>
+              There are no photos you have &#34;liked&#34; yet.
+              <br />
+              Save the photo by clicking the like button in the upper right corner of the photo.
+            </p>
+          </div>
+        )}
       </div>
     </aside>
   );

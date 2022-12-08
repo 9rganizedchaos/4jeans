@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Heart, ArrowUpCircle } from 'react-feather';
 import styles from './PhotoCard.module.scss';
+import { Photo } from '../../types/photo';
 
 export interface PhotoCardProps {
   imgUrl: string;
@@ -10,37 +11,46 @@ export interface PhotoCardProps {
   bio?: string | null;
   location?: string | null;
   color: string;
+  isOnLikedList?: boolean;
+  isLiked: boolean;
   handleMoreBtnClick: () => void;
+  handleLikeBtnClick: (photo: Photo) => void;
 }
 
 function PhotoCard({
-  imgUrl,
-  altText,
-  profileUrl = 'https://images.unsplash.com/profile-1609483876126-c002704cc7bdimage?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128',
-  username = 'unknown',
-  bio = 'This user did not leave a comment.',
-  location = 'unknown',
-  color,
   handleMoreBtnClick,
+  handleLikeBtnClick,
+  isOnLikedList = false,
+  isLiked,
+  ...photo
 }: PhotoCardProps) {
+  const {
+    imgUrl,
+    altText,
+    profileUrl = 'https://images.unsplash.com/profile-1609483876126-c002704cc7bdimage?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128',
+    username = 'unknown',
+    bio = 'This user did not leave a comment.',
+    location = 'unknown',
+    color,
+  } = photo;
+
   const [isInfoBoxOn, setIsInfoBoxOn] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
 
   const handleInfoBoxToggleClick = () => {
     setIsInfoBoxOn(!isInfoBoxOn);
   };
-  const handleLikeIconClick = () => {
-    setIsLiked(!isLiked);
-  };
 
   return (
     <article className={styles['card-wrapper']}>
-      <div className={styles['image-container']} style={{ backgroundColor: color }}>
+      <div
+        className={`${styles['image-container']} ${isOnLikedList && styles['liked-list']}`}
+        style={{ backgroundColor: color }}
+      >
         <img src={imgUrl} alt={altText} />
       </div>
       <div className={styles['card-front']}>
         <div className={styles['card-header']}>
-          <button type="button" onClick={handleLikeIconClick}>
+          <button type="button" onClick={() => handleLikeBtnClick(photo)}>
             <Heart width={24} height={24} className={`${isLiked ? styles.on : styles.off}`} />
           </button>
         </div>
@@ -83,4 +93,5 @@ PhotoCard.defaultProps = {
   username: 'unknown',
   bio: 'This user did not leave a comment.',
   location: 'unknown',
+  isOnLikedList: false,
 };
