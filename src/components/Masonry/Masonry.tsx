@@ -53,7 +53,7 @@ function Masonry({
 
   useEffect(() => {
     setColumns(makeMasonryColumns(children, columnsCount));
-  }, [columnsCount]);
+  }, [columnsCount, children]);
 
   return (
     <div className={className} style={style}>
