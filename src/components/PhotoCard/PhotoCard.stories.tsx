@@ -35,10 +35,18 @@ export function Vertical() {
   const handleMoreBtnClick = () => {
     console.log('More button clicked');
   };
+  const handleLikeBtnClick = () => {
+    console.log('Like button clicked');
+  };
 
   return (
     <div className={styles['sb-card-container']}>
-      <PhotoCard {...verticalPhotoProps} handleMoreBtnClick={handleMoreBtnClick} />
+      <PhotoCard
+        isLiked
+        {...verticalPhotoProps}
+        handleMoreBtnClick={handleMoreBtnClick}
+        handleLikeBtnClick={handleLikeBtnClick}
+      />
     </div>
   );
 }
@@ -47,10 +55,18 @@ export function Horizontal() {
   const handleMoreBtnClick = () => {
     console.log('More button clicked');
   };
+  const handleLikeBtnClick = () => {
+    console.log('Like button clicked');
+  };
 
   return (
     <div className={styles['sb-card-container']}>
-      <PhotoCard {...horizontalPhotoProps} handleMoreBtnClick={handleMoreBtnClick} />
+      <PhotoCard
+        {...horizontalPhotoProps}
+        isLiked
+        handleMoreBtnClick={handleMoreBtnClick}
+        handleLikeBtnClick={handleLikeBtnClick}
+      />
     </div>
   );
 }
