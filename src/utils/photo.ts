@@ -4,7 +4,7 @@ import { Photo } from '../types/photo';
 export const simplifyData = (rawData: any[]): Photo[] => {
   return rawData.map((data) => {
     return {
-      imgUrl: data.urls.full,
+      imgUrl: data.urls.small,
       altText: data.alt_description || '4jeans photo',
       profileUrl: data.user.profile_image.medium,
       username: data.user.name,

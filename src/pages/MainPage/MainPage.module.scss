@@ -17,16 +17,26 @@
     overflow-y: scroll;
 
     .page-content {
+      position: relative;
       width: 1150px;
-      padding: 8px 80px 80px;
+      padding: 8px 80px 0;
 
       .card-list-wrapper {
         display: flex;
         width: 100%;
+        min-height: 1000px;
         justify-content: center;
-        padding-bottom: 120px;
+        padding-bottom: 0;
+      }
+
+      .data-fetching-sensor {
+        position: absolute;
+        bottom: 0;
+        width: 990px;
+        height: 100px;
       }
     }
+
   }
 }
 
