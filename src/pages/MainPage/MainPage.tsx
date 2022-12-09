@@ -142,7 +142,9 @@ function MainPage() {
         />
         <div className={styles['page-content']}>
           <div className={styles['card-list-wrapper']}>
-            {(photoRepo.length === 0 && !isSearching) || (searchPhotoRepo.length === 0 && isSearching) ? (
+            {/* eslint-disable-next-line no-nested-ternary */}
+            {isPhotoListLoading || isPhotoSearchLoading ? null : (photoRepo.length === 0 && !isSearching) ||
+              (searchPhotoRepo.length === 0 && isSearching) ? (
               <div className={styles['no-result']}>
                 <Search />
                 <p>
