@@ -27,6 +27,28 @@
         min-height: 1000px;
         justify-content: center;
         padding-bottom: 0;
+
+        .no-result {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding-top: 60px;
+          text-align: center;
+
+          svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 16px;
+            stroke: styles.$gray-500;
+            stroke-width: 1px;
+          }
+
+          > p {
+            color: styles.$gray-600;
+            font-style: italic;
+            @include styles.font(text, 'lg', 400);
+          }
+        }
       }
 
       .data-fetching-sensor {
