@@ -1,13 +1,22 @@
-import React, { RefObject, useEffect, useState } from 'react';
+import React, { ChangeEvent, RefObject, useEffect, useState } from 'react';
 import styles from './Header.module.scss';
 import SearchBox from '../SearchBox/SearchBox';
 
 interface HeaderProps {
+  inputValue: string;
   scrollLayerRef: RefObject<HTMLDivElement> | null;
   handleEnterPressSearch: () => void;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleCancelBtnClick: () => void;
 }
 
-function Header({ scrollLayerRef, handleEnterPressSearch }: HeaderProps) {
+function Header({
+  scrollLayerRef,
+  handleEnterPressSearch,
+  handleInputChange,
+  inputValue,
+  handleCancelBtnClick,
+}: HeaderProps) {
   const [isNavStuck, setIsNavStuck] = useState<boolean>(false);
 
   const checkScrollYOffset = (e: Event) => {
@@ -41,7 +50,10 @@ function Header({ scrollLayerRef, handleEnterPressSearch }: HeaderProps) {
           <br /> them. If you like this page, please visit my GitHub and hit Star. Thank you! :)
         </p>
         <SearchBox
+          handleCancelBtnClick={handleCancelBtnClick}
+          inputValue={inputValue}
           placeholder="search your photo!"
+          handleInputChange={handleInputChange}
           handleEnterPress={handleEnterPressSearch}
           className={styles['main-page-search-box']}
         />

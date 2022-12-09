@@ -14,10 +14,22 @@ export function Default() {
   const handleEnterPressSearch = () => {
     console.log('Enter Pressed!');
   };
+  const handleInputChange = () => {
+    console.log('Input Changed!');
+  };
+  const handleCancelBtnClick = () => {
+    console.log('Cancel Button Clicked!');
+  };
 
   return (
     <div className={styles['sb-header-bg']} ref={scrollLayerRef}>
-      <Header scrollLayerRef={scrollLayerRef} handleEnterPressSearch={handleEnterPressSearch} />
+      <Header
+        handleCancelBtnClick={handleCancelBtnClick}
+        inputValue=""
+        scrollLayerRef={scrollLayerRef}
+        handleEnterPressSearch={handleEnterPressSearch}
+        handleInputChange={handleInputChange}
+      />
     </div>
   );
 }
