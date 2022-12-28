@@ -41,4 +41,5 @@
 
 - install: `npm install`
 - start: `npm start`
-  (로컬에서 실행을 원하실 경우, [Unsplash](https://unsplash.com/)에 방문하여 App Key를 발급받으시고, .env에 `REACT_APP_CLIENT_ID`를 추가해주세요!)
+
+(로컬에서 실행을 원하실 경우, [Unsplash](https://unsplash.com/)에 방문하여 App Key를 발급받으시고, .env에 `REACT_APP_CLIENT_ID`를 추가해주세요!)
