@@ -13,7 +13,7 @@ import Modal from '../../components/Modal/Modal';
 
 import { Photo } from '../../types/photo';
 import { simplifyData } from '../../utils/photo';
-import ImgFilterPanel from '../../components/ImgFilterPanle/ImgFilterPanel';
+import ImgFilterPanel from '../../components/ImgFilterPanel/ImgFilterPanel';
 
 const LOCAL_STORAGE_KEY = '4jeans-liked-list';
 

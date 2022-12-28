@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { Download, Loader } from 'react-feather';
+import { Check, Download } from 'react-feather';
 import styles from './ImgFilterPanel.module.scss';
 import FilterTag, { FilterType } from '../FilterTag/FilterTag';
 import { Photo } from '../../types/photo';
+import RangeSlider from '../RangeSlider/RangeSlider';
 
 const CANVAS_WIDTH = 674;
 const CANVAS_HEIGHT = 450;
@@ -17,7 +18,9 @@ function ImgFilterPanel({ selectedPhoto }: ImageFilterPanelProps) {
   const [context, setContext] = useState<CanvasRenderingContext2D>();
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const [image, setImage] = useState<HTMLImageElement>();
-  const [brightnessValue, setBrightnessValue] = useState(100);
+  const [originalImageData, setOriginalImageData] = useState<ImageData>();
+  const [brightnessValue, setBrightnessValue] = useState(0);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const handleDownloadClick = () => {
@@ -29,81 +32,83 @@ function ImgFilterPanel({ selectedPhoto }: ImageFilterPanelProps) {
     }
   };
 
-  const applyReversalFilter = (pixels: ImageData) => {
-    const d = pixels.data;
-    for (let i = 0; i < pixels.data.length; i += 4) {
-      d[i] = 255 - d[i];
-      d[i + 1] = 255 - d[i + 1];
-      d[i + 2] = 255 - d[i + 2];
-      d[i + 3] = 255;
+  const applyReversalFilter = (imageData: ImageData) => {
+    const pixels = new Uint8ClampedArray(imageData.data);
+    for (let i = 0; i < pixels.length; i += 4) {
+      pixels[i] = 255 - pixels[i];
+      pixels[i + 1] = 255 - pixels[i + 1];
+      pixels[i + 2] = 255 - pixels[i + 2];
+      pixels[i + 3] = 255;
     }
-    return pixels;
+    return new ImageData(pixels, imageData.width, imageData.height);
   };
-  const applyBrightnessFilter = (pixels: ImageData, value: number) => {
-    const d = pixels.data;
-    for (let i = 0; i < d.length; i += 4) {
-      d[i] += value / 3;
-      d[i + 1] += value / 3;
-      d[i + 2] += value / 3;
+  const applyBrightnessFilter = (imageData: ImageData, value: number) => {
+    const pixels = new Uint8ClampedArray(imageData.data);
+    for (let i = 0; i < pixels.length; i += 4) {
+      pixels[i] += value;
+      pixels[i + 1] += value;
+      pixels[i + 2] += value;
     }
-    return pixels;
+    return new ImageData(pixels, imageData.width, imageData.height);
   };
-  const applyGrayScaleFilter = (pixels: ImageData) => {
-    const d = pixels.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i];
-      const g = d[i + 1];
-      const b = d[i + 2];
+  const applyGrayScaleFilter = (imageData: ImageData) => {
+    const pixels = new Uint8ClampedArray(imageData.data);
+    for (let i = 0; i < pixels.length; i += 4) {
+      const r = pixels[i];
+      const g = pixels[i + 1];
+      const b = pixels[i + 2];
 
-      const v = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-      // eslint-disable-next-line no-multi-assign
-      d[i] = d[i + 1] = d[i + 2] = v;
+      const grayScaledValue = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      pixels[i] = grayScaledValue;
+      pixels[i + 1] = grayScaledValue;
+      pixels[i + 2] = grayScaledValue;
     }
-    return pixels;
+    return new ImageData(pixels, imageData.width, imageData.height);
   };
-  const applySepiaFilter = (pixels: ImageData) => {
-    const d = pixels.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i];
-      const g = d[i + 1];
-      const b = d[i + 2];
+  const applySepiaFilter = (imageData: ImageData) => {
+    const pixels = new Uint8ClampedArray(imageData.data);
+    for (let i = 0; i < pixels.length; i += 4) {
+      const r = pixels[i];
+      const g = pixels[i + 1];
+      const b = pixels[i + 2];
 
-      d[i] = r * 0.3588 + g * 0.7044 + b * 0.1368;
-      d[i + 1] = r * 0.299 + g * 0.587 + b * 0.114;
-      d[i + 2] = r * 0.2392 + g * 0.4696 + b * 0.0912;
+      pixels[i] = r * 0.3588 + g * 0.7044 + b * 0.1368;
+      pixels[i + 1] = r * 0.299 + g * 0.587 + b * 0.114;
+      pixels[i + 2] = r * 0.2392 + g * 0.4696 + b * 0.0912;
     }
-    return pixels;
+    return new ImageData(pixels, imageData.width, imageData.height);
   };
   const handleFilterTagClick = (filterType: FilterType, value?: number) => {
+    if (!originalImageData || !context) return;
+    let processedData: ImageData;
+
     if (activeFilter === filterType) {
       setActiveFilter(null);
+      processedData = originalImageData;
+      if (filterType === 'brightness') {
+        setBrightnessValue(0);
+      }
     } else {
       setActiveFilter(filterType);
+      switch (filterType) {
+        case 'contrast':
+          processedData = applyReversalFilter(originalImageData);
+          break;
+        case 'grayscale':
+          processedData = applyGrayScaleFilter(originalImageData);
+          break;
+        case 'sepia':
+          processedData = applySepiaFilter(originalImageData);
+          break;
+        case 'brightness':
+          processedData = applyBrightnessFilter(originalImageData, value || 0);
+          break;
+        default:
+          processedData = originalImageData;
+          break;
+      }
     }
-
-    if (!context || !canvasRef.current) return;
-    const pixels = context.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height);
-    let filteredData: ImageData;
-
-    switch (filterType) {
-      case 'contrast':
-        filteredData = applyReversalFilter(pixels);
-        break;
-      case 'grayscale':
-        filteredData = applyGrayScaleFilter(pixels);
-        break;
-      case 'sepia':
-        filteredData = applySepiaFilter(pixels);
-        break;
-      case 'brightness':
-        filteredData = applyBrightnessFilter(pixels, value || 0);
-        break;
-      default:
-        filteredData = pixels;
-        break;
-    }
-
-    context.putImageData(filteredData, 0, 0);
+    context.putImageData(processedData, 0, 0);
   };
 
   const handleRangeInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -148,7 +153,17 @@ function ImgFilterPanel({ selectedPhoto }: ImageFilterPanelProps) {
   useEffect(() => {
     if (!canvasSize.width || !canvasSize.height || !image) return;
     context?.drawImage(image, 0, 0, canvasSize.width, canvasSize.height);
+
+    if (!canvasRef.current || !context) return;
+    const imageData = context.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height);
+    setOriginalImageData(imageData);
   }, [canvasSize, image]);
+
+  useEffect(() => {
+    if (!originalImageData || !context) return;
+    const processedData = applyBrightnessFilter(originalImageData, brightnessValue || 0);
+    context.putImageData(processedData, 0, 0);
+  }, [brightnessValue]);
 
   return (
     <div className={styles['panel-wrapper']}>
@@ -157,7 +172,7 @@ function ImgFilterPanel({ selectedPhoto }: ImageFilterPanelProps) {
       </div>
       <div className={styles['control-panel']}>
         <div className={styles['filter-part']}>
-          <Loader />
+          <Check />
           <p>
             You can apply filters
             <br />
@@ -177,7 +192,13 @@ function ImgFilterPanel({ selectedPhoto }: ImageFilterPanelProps) {
           </ul>
           {activeFilter === 'brightness' && (
             <div className={styles['brightness-range']}>
-              <input type="range" min={0} max={100} onChange={(e) => handleRangeInputChange(e)} />
+              <RangeSlider
+                defaultValue={brightnessValue}
+                min={-50}
+                max={50}
+                step={10}
+                handleChangeSlider={(e) => handleRangeInputChange(e)}
+              />
             </div>
           )}
         </div>

@@ -1,0 +1,50 @@
+@use '../../styles/styles';
+
+input[type=range] {
+  /* stylelint-disable property-no-vendor-prefix */
+  width: 100%;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 300px;
+  height: 6px;
+  border: none;
+  border-radius: 3px;
+  background: styles.$gray-100;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  margin-top: -3px;
+  -webkit-appearance: none;
+  background: styles.$gray-500;
+}
+
+input[type=range]:hover {
+  outline: none;
+}
+
+input[type=range]:hover::-webkit-slider-thumb {
+  background: styles.$gray-600;
+}
+
+input[type=range]:hover::-webkit-slider-runnable-track {
+  background: styles.$gray-200;
+}
+
+.sb-range-slider-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+  .sb-range-slider-width-fixer {
+    width: 200px;
+  }
+}
