@@ -13,7 +13,7 @@ export interface PhotoCardProps {
   color: string;
   isOnLikedList?: boolean;
   isLiked: boolean;
-  handleMoreBtnClick: () => void;
+  handleMoreBtnClick: (photo: Photo) => void;
   handleLikeBtnClick: (photo: Photo) => void;
 }
 
@@ -74,7 +74,7 @@ function PhotoCard({
               <MapPin width={16} height={16} />
               <p>{location || 'unknown'}</p>
             </div>
-            <button type="button" onClick={handleMoreBtnClick}>
+            <button type="button" onClick={() => handleMoreBtnClick(photo)}>
               <em>more</em>
             </button>
           </div>

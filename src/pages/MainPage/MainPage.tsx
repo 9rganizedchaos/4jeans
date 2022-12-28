@@ -13,6 +13,7 @@ import Modal from '../../components/Modal/Modal';
 
 import { Photo } from '../../types/photo';
 import { simplifyData } from '../../utils/photo';
+import ImgFilterPanel from '../../components/ImgFilterPanel/ImgFilterPanel';
 
 const LOCAL_STORAGE_KEY = '4jeans-liked-list';
 
@@ -29,6 +30,7 @@ function MainPage() {
   const [query, setQuery] = useState<string>(initialQuery || '');
   const [page, setPage] = useState<number>(1);
   const [searchPage, setSearchPage] = useState<number>(1);
+  const [selectedPhoto, setSelectedPhoto] = useState<Photo>();
   const [photoRepo, setPhotoRepo] = useState<Photo[]>([]);
   const [searchPhotoRepo, setSearchPhotoRepo] = useState<Photo[]>([]);
   const [likedPhotoRepo, setLikedPhotoRepo] = useState<Photo[]>(initialLikedList);
@@ -71,7 +73,8 @@ function MainPage() {
     setIsModalOpen(false);
   };
 
-  const handleMoreBtnClick = () => {
+  const handleMoreBtnClick = (photo: Photo) => {
+    setSelectedPhoto(photo);
     setIsModalOpen(true);
   };
 
@@ -130,7 +133,7 @@ function MainPage() {
   return (
     <div className={styles['page-wrapper']}>
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-        <div className={styles['sb-modal-content']} />
+        {selectedPhoto ? <ImgFilterPanel selectedPhoto={selectedPhoto} /> : null}
       </Modal>
       <div className={styles['page-scroll-layer']} ref={scrollLayerRef}>
         <Header

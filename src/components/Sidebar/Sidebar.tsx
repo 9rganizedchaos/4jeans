@@ -7,7 +7,7 @@ import { Photo } from '../../types/photo';
 
 interface SidebarProps {
   photos: any[];
-  handleMoreBtnClick: () => void;
+  handleMoreBtnClick: (photo: Photo) => void;
   handleLikeBtnClick: (photo: Photo) => void;
 }
 

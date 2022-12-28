@@ -8,7 +8,7 @@ interface PhotoCardListProps {
   photoRepo: Photo[];
   likedPhotoRepo: Photo[];
   className?: string;
-  handleMoreBtnClick: () => void;
+  handleMoreBtnClick: (photo: Photo) => void;
   handleLikeBtnClick: (photo: Photo) => void;
 }
 

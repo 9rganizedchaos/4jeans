@@ -1,0 +1,30 @@
+@use '../../styles/styles';
+
+.filter-tag {
+  padding: 4px 8px;
+  border-radius: 24px;
+  background-color: styles.$gray-100;
+  color: styles.$gray-500;
+  @include styles.font(text, 'xs', 400);
+
+  &:hover {
+    background-color: styles.$gray-200;
+  }
+
+  &.active {
+    background-color: styles.$gray-400;
+    color: styles.$gray-100;
+
+    &:hover {
+      background-color: styles.$gray-300;
+    }
+  }
+}
+
+.sb-filter-tag-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
