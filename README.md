@@ -1,9 +1,9 @@
 # 4jeans 👖👖👖👖
 
-> Photo Search App using Unsplash API 📸
+> Photo Search App using Unsplash API 📸 <br/>
 > 프론트엔드 개발 주제들을 탐구하기 위한 토이프로젝트
 
-<img src="https://user-images.githubusercontent.com/75521675/209753240-a2300a95-d95e-469d-be08-a0d259964d4e.gif"  alt="4jeans" title="4jeans"/>
+<img src="https://user-images.githubusercontent.com/75521675/209753240-a2300a95-d95e-469d-be08-a0d259964d4e.gif" width="1320" alt="4jeans" title="4jeans"/>
 
 ## Outlines
 
